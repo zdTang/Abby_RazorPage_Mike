@@ -1,3 +1,6 @@
+using Abby_RazorPage_Mike.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Abby_RazorPage_Mike
 {
     public class Program
@@ -8,7 +11,9 @@ namespace Abby_RazorPage_Mike
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
