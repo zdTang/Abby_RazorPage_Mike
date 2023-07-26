@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Abby_RazorPage_Mike.Pages.Categories
 {
+    //The [BindProperties] attribute can be used on a PageModel class to
+    //apply model binding to all public properties of the class.
     [BindProperties]
     public class CreateModel : PageModel
     {
@@ -20,9 +22,13 @@ namespace Abby_RazorPage_Mike.Pages.Categories
         }
         public async Task<IActionResult> OnPost()
         {
-            await _db.Category.AddAsync(Category);
-            await _db.SaveChangesAsync();
-            return RedirectToPage("Index");
+            if (ModelState.IsValid)
+            {
+                await _db.Category.AddAsync(Category);
+                await _db.SaveChangesAsync();
+                return RedirectToPage("Index");
+            }
+            return Page();
         }
     }
 }
