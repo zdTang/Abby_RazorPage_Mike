@@ -7,7 +7,7 @@ namespace Abby_RazorPage_Mike.Pages.Categories
 {
     //The [BindProperties] attribute can be used on a PageModel class to
     //apply model binding to all public properties of the class.
-    [BindProperties]
+    //[BindProperties]
     public class CreateModel : PageModel
     {
         public Category Category { get; set; }
@@ -20,7 +20,10 @@ namespace Abby_RazorPage_Mike.Pages.Categories
         {
 
         }
-        public async Task<IActionResult> OnPost()
+        // Notice, the coming Category object is not used as a parameter
+        // But as a public property of this Model
+        // What if we have serveral public properties, how to do model binding
+        public async Task<IActionResult> OnPost(Category Category)
         {
             if (ModelState.IsValid)
             {
