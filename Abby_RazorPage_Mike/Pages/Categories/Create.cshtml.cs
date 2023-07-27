@@ -25,6 +25,11 @@ namespace Abby_RazorPage_Mike.Pages.Categories
         // What if we have serveral public properties, how to do model binding
         public async Task<IActionResult> OnPost()
         {
+            if (Category.Name == Category.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError(string.Empty, "The DisplayOrder cannot exactly match the Name.");
+            }
+
             if (ModelState.IsValid)
             {
                 await _db.Category.AddAsync(Category);
