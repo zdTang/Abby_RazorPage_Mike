@@ -1,5 +1,6 @@
 using Abby_RazorPage_Mike.Data;
 using Abby_RazorPage_Mike.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Abby_RazorPage_Mike.Pages.Categories
@@ -13,12 +14,12 @@ namespace Abby_RazorPage_Mike.Pages.Categories
         {
             _db = db;
         }
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             Category = _db.Category.Find(id);
             _db.Category.Remove(Category);
             await _db.SaveChangesAsync();
-            RedirectToPage("../Categories/Index");
+            return RedirectToPage("Index");
         }
     }
 }
