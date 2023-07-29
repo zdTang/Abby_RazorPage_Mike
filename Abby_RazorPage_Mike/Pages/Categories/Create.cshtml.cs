@@ -34,7 +34,7 @@ namespace Abby_RazorPage_Mike.Pages.Categories
             {
                 await _db.Category.AddAsync(Category);
                 await _db.SaveChangesAsync();
-                ViewData["success"] = "Category created successfully";
+                TempData["success"] = "Category created successfully";
                 return RedirectToPage("Index");
             }
             return Page();
