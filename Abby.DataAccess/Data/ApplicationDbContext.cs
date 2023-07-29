@@ -1,7 +1,7 @@
 ﻿using Abby.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Abby_RazorPage_Mike.Data
+namespace Abby.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

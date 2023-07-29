@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Abby_RazorPage_Mike.Migrations
+namespace Abby.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTable : Migration

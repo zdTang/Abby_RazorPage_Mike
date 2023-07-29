@@ -9,6 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abby_RazorPage_Mike", "Abby
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abby.DataAccess", "Abby.DataAccess\Abby.DataAccess.csproj", "{2485DA0B-18A2-49EB-A343-91436C79CC39}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9567A206-5C6C-45C5-B190-64B9574C1E2F} = {9567A206-5C6C-45C5-B190-64B9574C1E2F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abby.Models", "Abby.Models\Abby.Models.csproj", "{9567A206-5C6C-45C5-B190-64B9574C1E2F}"
 EndProject

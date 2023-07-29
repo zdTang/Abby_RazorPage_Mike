@@ -16,6 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Abby.DataAccess\Abby.DataAccess.csproj" />
 	  <ProjectReference Include="..\Abby.Models\Abby.Models.csproj" />
 	</ItemGroup>
 
