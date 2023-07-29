@@ -1,5 +1,5 @@
 using Abby_RazorPage_Mike.Data;
-using Abby_RazorPage_Mike.Model;
+using Abby.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Abby_RazorPage_Mike.Pages.Categories

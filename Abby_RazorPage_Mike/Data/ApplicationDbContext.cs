@@ -1,4 +1,4 @@
-﻿using Abby_RazorPage_Mike.Model;
+﻿using Abby.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Abby_RazorPage_Mike.Data

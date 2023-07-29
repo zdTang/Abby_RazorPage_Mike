@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Abby_RazorPage_Mike.Model
+namespace Abby.Models
 {
     public class Category
     {

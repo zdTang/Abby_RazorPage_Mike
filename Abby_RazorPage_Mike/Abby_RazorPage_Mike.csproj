@@ -15,4 +15,8 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Abby.Models\Abby.Models.csproj" />
+	</ItemGroup>
+
 </Project>

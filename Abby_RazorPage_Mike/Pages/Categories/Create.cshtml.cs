@@ -1,5 +1,5 @@
+using Abby.Models;
 using Abby_RazorPage_Mike.Data;
-using Abby_RazorPage_Mike.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

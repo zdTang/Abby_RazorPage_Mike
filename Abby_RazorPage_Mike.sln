@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abby_RazorPage_Mike", "Abby_RazorPage_Mike\Abby_RazorPage_Mike.csproj", "{386B45F3-D62A-45B7-AA68-C70602862C69}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9567A206-5C6C-45C5-B190-64B9574C1E2F} = {9567A206-5C6C-45C5-B190-64B9574C1E2F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abby.DataAccess", "Abby.DataAccess\Abby.DataAccess.csproj", "{2485DA0B-18A2-49EB-A343-91436C79CC39}"
 EndProject
