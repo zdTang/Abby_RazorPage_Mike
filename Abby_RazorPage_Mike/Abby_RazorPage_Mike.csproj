@@ -20,4 +20,8 @@
 	  <ProjectReference Include="..\Abby.Models\Abby.Models.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Pages\Customer\" />
+	</ItemGroup>
+
 </Project>

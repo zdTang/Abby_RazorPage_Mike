@@ -8,14 +8,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abby_RazorPage_Mike", "Abby
 		{9567A206-5C6C-45C5-B190-64B9574C1E2F} = {9567A206-5C6C-45C5-B190-64B9574C1E2F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abby.DataAccess", "Abby.DataAccess\Abby.DataAccess.csproj", "{2485DA0B-18A2-49EB-A343-91436C79CC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abby.DataAccess", "Abby.DataAccess\Abby.DataAccess.csproj", "{2485DA0B-18A2-49EB-A343-91436C79CC39}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9567A206-5C6C-45C5-B190-64B9574C1E2F} = {9567A206-5C6C-45C5-B190-64B9574C1E2F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abby.Models", "Abby.Models\Abby.Models.csproj", "{9567A206-5C6C-45C5-B190-64B9574C1E2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abby.Models", "Abby.Models\Abby.Models.csproj", "{9567A206-5C6C-45C5-B190-64B9574C1E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abby.Utility", "Abby.Utility\Abby.Utility.csproj", "{66FB8F9A-39CD-45DF-B318-D2E44277779B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abby.Utility", "Abby.Utility\Abby.Utility.csproj", "{66FB8F9A-39CD-45DF-B318-D2E44277779B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

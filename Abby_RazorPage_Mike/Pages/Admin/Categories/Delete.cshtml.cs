@@ -3,7 +3,7 @@ using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Abby_RazorPage_Mike.Pages.Categories
+namespace Abby_RazorPage_Mike.Pages.Admin.Categories
 {
     [BindProperties]
     public class DeleteModel : PageModel
