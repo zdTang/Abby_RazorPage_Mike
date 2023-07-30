@@ -1,7 +1,13 @@
 ﻿@page
 @model Abby_RazorPage_Mike.Pages.Categories.IndexModel
 
-
+@* loading aowsome font icon is a lit slow,and this approach not work well
+    https://stackoverflow.com/questions/35877994/font-awesome-is-loading-very-slow
+    @{
+    <script type="text/javascript">
+        (function () { var js = document.createElement('script'); js.src = 'https://kit.fontawesome.com/157d7c246f.js'; document.getElementsByTagName('head')[0].appendChild(js); })();
+    </script>
+}*@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
@@ -53,6 +59,6 @@
 </div>
 
 @section Scripts{
-    <script src="https://kit.fontawesome.com/157d7c246f.js" crossorigin="anonymous"></script> <!--This line is for using FA-->
+    <script src="https://kit.fontawesome.com/157d7c246f.js" crossorigin="anonymous"></script><!-- This line is for using FA-->
 }
 
