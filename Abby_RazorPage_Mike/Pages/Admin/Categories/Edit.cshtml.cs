@@ -1,4 +1,5 @@
 using Abby.DataAccess.Data;
+using Abby.DataAccess.Repository.IRepository;
 using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,17 +11,20 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
     [BindProperties]
     public class EditModel : PageModel
     {
-        public Category? Category { get; set; }
-        private readonly ApplicationDbContext _db;
-        public EditModel(ApplicationDbContext db)
+        public Category? Category { get; set; }    // This is Model, the Razor content Page will use it to retrieve data
+        //private readonly ApplicationDbContext _db; // No pattern
+        private readonly IUnitOfWork _unitOfWork;    // UnitOfWork Pattern
+        public EditModel(/*ApplicationDbContext db*/IUnitOfWork unitOfWork)
         {
-            _db = db;
+            //_db = db;                  // No pattern, access DbContext directly
+            _unitOfWork = unitOfWork;
         }
         public void OnGet(int id)
         {
             // Here we can get the Id of the Category which need to be edited.
             // we will use this id to retrieve data from database and send to front end.
-            Category = _db.Category.Find(id);
+            // Category = _db.Category.Find(id);
+            Category = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             //Category = _db.Category.FirstOrDefault(u=>u.Id==id);
             //Category = _db.Category.SingleOrDefault(u=>u.Id==id);
             //Category = _db.Category.Where(u => u.Id == id).FirstOrDefault();
@@ -28,7 +32,7 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
         // Notice, the coming Category object is not used as a parameter
         // But as a public property of this Model
         // What if we have serveral public properties, how to do model binding
-        public async Task<IActionResult> OnPost()
+        public IActionResult OnPost()
         {
             if (Category?.Name == Category?.DisplayOrder.ToString())
             {
@@ -37,8 +41,10 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
 
             if (ModelState.IsValid)
             {
-                _db.Category.Update(Category);
-                await _db.SaveChangesAsync();
+                // _db.Category.Update(Category);
+                // await _db.SaveChangesAsync();
+                _unitOfWork.Category.Update(Category!);
+                _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully";
                 return RedirectToPage("Index");
             }

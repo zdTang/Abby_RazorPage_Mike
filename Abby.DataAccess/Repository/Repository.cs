@@ -31,7 +31,7 @@ namespace Abby.DataAccess.Repository
             //return query.ToList();
             return dbSet.AsQueryable<T>().ToList();
         }
-
+        // At first, we use Find(), which can only work based on Id, the function is limited.
         public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null)
         {
             IQueryable<T> query = dbSet;
