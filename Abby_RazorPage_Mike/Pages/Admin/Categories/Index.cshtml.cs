@@ -13,15 +13,18 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
         // For PageModel, what it need do is just Inject the Repository and use the relevant method.
         // PageModel will not access dbContext any more.
         public IEnumerable<Category> Categories { get; set; }
-        private readonly ICategoryRepository _categoriesRepository;
-        public IndexModel(ICategoryRepository categoryRepository)
+        //private readonly ICategoryRepository _categoriesRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public IndexModel(/*ICategoryRepository categoryRepository*/IUnitOfWork unitOfWork)
         {
-            _categoriesRepository = categoryRepository;
+            //_categoriesRepository = categoryRepository;        // repository pattern
+            _unitOfWork = unitOfWork;                              // UnitOfWork pattern
         }
         public void OnGet()
         {
-            //Categories = _db.Category;
-            Categories = _categoriesRepository.GetAll();
+            //Categories = _db.Category;                         // direct access DbContext, no repository
+            //Categories = _categoriesRepository.GetAll();       // using repository
+            Categories = _unitOfWork.Category.GetAll();          // using UnitOfWork pattern
         }
     }
 }

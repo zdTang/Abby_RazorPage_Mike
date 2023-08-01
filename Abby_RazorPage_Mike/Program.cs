@@ -17,7 +17,7 @@ namespace Abby_RazorPage_Mike
             builder.Configuration.GetConnectionString("DefaultConnection")
     ));
             // The following are for DI registeration
-            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
