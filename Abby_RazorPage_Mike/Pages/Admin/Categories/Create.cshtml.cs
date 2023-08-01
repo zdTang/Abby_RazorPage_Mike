@@ -2,7 +2,7 @@ using Abby.Models;
 using Abby.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Abby.DataAccess.Repository.IRepository;
 
 namespace Abby_RazorPage_Mike.Pages.Admin.Categories
 {
@@ -12,10 +12,11 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
     public class CreateModel : PageModel
     {
         public Category Category { get; set; }
-        private readonly ApplicationDbContext _db;
-        public CreateModel(ApplicationDbContext db)
+        //private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _categoriesRepository;
+        public CreateModel(ICategoryRepository categoryRepository)
         {
-            _db = db;
+            _categoriesRepository = categoryRepository;
         }
         public void OnGet()
         {
@@ -33,8 +34,11 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
 
             if (ModelState.IsValid)
             {
-                await _db.Category.AddAsync(Category);
-                await _db.SaveChangesAsync();
+                //await _db.Category.AddAsync(Category);
+                //await _db.SaveChangesAsync();
+                _categoriesRepository.Add(Category); // Using Repository let use decouple with DAL
+                _categoriesRepository.Save();
+
                 TempData["success"] = "Category created successfully";
                 return RedirectToPage("Index");
             }
