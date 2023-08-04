@@ -1,0 +1,75 @@
+﻿@page
+@model Abby_RazorPage_Mike.Pages.Admin.MenuItems.IndexModel
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Menu Item List</h2>
+        </div>
+        <div class="col-6">
+            <a asp-page="/Admin/MenuItems/Create" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i>&nbsp;Create New Menu Item
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    FoodType Id
+                </th>
+                <th>
+                    Category Id
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Image
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.MenuItems)
+            {
+                <tr>
+                    <td width="50%">@obj.Name</td>
+                    <td width="50%">@obj.Price</td>
+                    <td width="50%">@obj.FoodTypeId</td>
+                    <td width="50%">@obj.CategoryId</td>
+                    <td width="50%">@obj.Description</td>
+                    <td width="50%">@obj.Image</td>
+
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-page="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                <i class="fa-solid fa-pencil"></i>
+                            </a>
+                            <a asp-page="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts{
+    <script src="https://kit.fontawesome.com/157d7c246f.js" crossorigin="anonymous"></script><!-- This line is for using FA-->
+}
+
