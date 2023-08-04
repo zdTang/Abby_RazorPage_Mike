@@ -16,7 +16,6 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
 
         public void OnGet()
         {
-            MenuItems = _unitOfWork.MenuItem.GetAll();
         }
     }
 
