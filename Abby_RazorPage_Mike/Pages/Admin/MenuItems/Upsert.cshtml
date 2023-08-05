@@ -2,7 +2,10 @@
 @using Abby.Models;
 @model Abby_RazorPage_Mike.Pages.Admin.MenuItems.UpsertModel
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
+    <!--
+        if we want upload file, here "enctype" must choose "multipart/form-data"
+    -->
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary pl-3">

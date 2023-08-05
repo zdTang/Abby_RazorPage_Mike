@@ -20,11 +20,13 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
         public MenuItem MenuItem { get; set; }
         public IEnumerable<SelectListItem> CategoryList { get; set; }    // Used for UI to draw dropdown list 
         public IEnumerable<SelectListItem> FoodTypeList { get; set; }    // Used for UI to draw dropdown list
-        private readonly IUnitOfWork _unitOfWork;                        // UnitOfWork pattern
-        public UpsertModel(IUnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _hostEnvironment;           // Provide information about Hosting Environment
+        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
             MenuItem = new MenuItem();
+            _hostEnvironment = hostEnvironment;
         }
         public void OnGet()
         {
@@ -43,14 +45,37 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
         }
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    _unitOfWork.MenuItem.Add(MenuItem);    // UnitOfWork pattern
+            //    _unitOfWork.Save();                    // UnitOfWork pattern
+            //    TempData["success"] = "MenuItem created successfully";
+            //    return RedirectToPage("Index");
+            //}
+            //return Page();
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;                         // File collection send with the request
+            if (MenuItem.Id == 0)
             {
-                _unitOfWork.MenuItem.Add(MenuItem);    // UnitOfWork pattern
-                _unitOfWork.Save();                    // UnitOfWork pattern
-                TempData["success"] = "MenuItem created successfully";
-                return RedirectToPage("Index");
+                // == Create a new MenuItem ==
+
+                var fileName_new = Guid.NewGuid().ToString();                    // Create a global unique identifier
+                var uploadPath = Path.Combine(webRootPath, @"images\menuItems");
+                var uploadFileExtension = Path.GetExtension(files[0].FileName);
+
+                using (var fileStream = new FileStream(Path.Combine(uploadPath, fileName_new + uploadFileExtension), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
+                }
+                MenuItem.Image = @"\images\menuItems\" + fileName_new + uploadFileExtension;
+                _unitOfWork.MenuItem.Add(MenuItem);
+                _unitOfWork.Save();
             }
-            return Page();
+            else
+            {
+                // == Edit an existed MenuItem ==
+            }
+            return RedirectToPage("Index");
         }
     }
 }
