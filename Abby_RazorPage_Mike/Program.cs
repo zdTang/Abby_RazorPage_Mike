@@ -38,6 +38,9 @@ namespace Abby_RazorPage_Mike
 
             app.MapRazorPages();
 
+            //https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-7.0
+            app.MapControllers();  // This is called to map Attribute routed controllers
+
             app.Run();
         }
     }
