@@ -2,6 +2,7 @@
 using Abby.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 
 namespace Abby.DataAccess.Repository
 {
@@ -20,11 +21,37 @@ namespace Abby.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
+            //========================version one - tutor
             //IQueryable<T> query = dbSet;
             //return query.ToList();
-            return dbSet.AsQueryable<T>().ToList();
+            //=========================version two - Mike
+            //return dbSet.AsQueryable<T>().ToList();
+            //=========================version 3 --add 'include" - tutor
+            //IQueryable<T> query = dbSet;
+            //if (includeProperties != null)
+            //{
+            //    //abc,,xyz -> abc xyz
+            //    foreach (var includeProperty in includeProperties.Split(
+            //        new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            //    {
+            //        query = query.Include(includeProperty);
+            //    }
+            //}
+            //=========================version 3 --add 'include" - MIKE
+            //IQueryable<T> query = dbSet;
+            var query = dbSet.AsQueryable<T>();
+            if (includeProperties != null)
+            {
+                //abc,,xyz -> abc xyz
+                foreach (var includeProperty in includeProperties.Split(
+                    new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);  // this line do the trick:  .Include().Include()
+                }
+            }
+            return query.ToList();
         }
         // At first, we use Find(), which can only work based on Id, the function is limited.
         public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null)

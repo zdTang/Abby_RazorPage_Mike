@@ -17,7 +17,7 @@ namespace Abby_RazorPage_Mike.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var menuItemList = _unitOfWork.MenuItem.GetAll();
+            var menuItemList = _unitOfWork.MenuItem.GetAll(includeProperties: "Category,FoodType");
             return Json(new { data = menuItemList });
         }
     }

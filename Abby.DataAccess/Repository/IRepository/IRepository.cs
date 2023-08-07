@@ -8,7 +8,7 @@ namespace Abby.DataAccess.Repository.IRepository
         void Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(string? includeProperties = null);
         // This use lambda expression, can get anything based on given logic
         T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null);
     }
