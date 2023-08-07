@@ -28,8 +28,14 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
             MenuItem = new MenuItem();
             _hostEnvironment = hostEnvironment;
         }
-        public void OnGet()
+        public void OnGet(int? id)
         {
+            if (id != null)
+            {
+                //edit
+                MenuItem = _unitOfWork.MenuItem.GetFirstOrDefault(u => u.Id == id);
+            }
+
             // Using projecting -- Select
             CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
             {
