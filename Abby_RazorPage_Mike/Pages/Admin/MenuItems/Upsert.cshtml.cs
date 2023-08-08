@@ -49,6 +49,8 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
                 Value = u.Id.ToString()
             });
         }
+
+        // Both Create and Update will use this OnPost handler !
         public IActionResult OnPost()
         {
             //if (ModelState.IsValid)
@@ -80,6 +82,33 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
             else
             {
                 // == Edit an existed MenuItem ==
+                var objFromDb = _unitOfWork.MenuItem.GetFirstOrDefault(u => u.Id == MenuItem.Id);
+                if (files.Count > 0) // User updated the image (uploaded a new image file)
+                {
+                    string fileName_new = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(webRootPath, @"images\menuItems");
+                    var extension = Path.GetExtension(files[0].FileName);
+
+                    //delete the old image
+                    var oldImagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                    //new upload
+                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName_new + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+                    MenuItem.Image = @"\images\menuItems\" + fileName_new + extension;
+                }
+                else   // user has not update the image part, still use the old value
+                {
+                    MenuItem.Image = objFromDb.Image;  // Assign the old value to the Model
+                }
+                _unitOfWork.MenuItem.Update(MenuItem);
+                _unitOfWork.Save();
+
             }
             return RedirectToPage("Index");
         }

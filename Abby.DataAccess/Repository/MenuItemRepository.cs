@@ -22,8 +22,8 @@ namespace Abby.DataAccess.Repository
                 objFromDb.Price = menuItem.Price;
                 objFromDb.CategoryId = menuItem.CategoryId;
                 objFromDb.FoodTypeId = menuItem.FoodTypeId;
-                if (objFromDb.Image != null) // Here is important! Sometimes user only update other perperties                                  
-                {                            // In order to don't delete existed image URL,We need check here.
+                if (objFromDb.Image != null) // if the database has image value, then update it or not   ????      don't understand                             
+                {
                     objFromDb.Image = menuItem.Image;
                 }
             }
