@@ -16,6 +16,9 @@ namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems
 
         public void OnGet()
         {
+            // will not pass Model to Razer from here.
+            // will use Client side render.
+            // the browser will call Web API to pull MenuItem
         }
     }
 

@@ -1,9 +1,7 @@
+using Abby.DataAccess.Repository.IRepository;
 using Abby.Models;
-using Abby.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Abby.DataAccess.Repository.IRepository;
-using Abby.DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Abby_RazorPage_Mike.Pages.Admin.MenuItems

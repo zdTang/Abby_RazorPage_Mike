@@ -23,7 +23,8 @@ namespace Abby_RazorPage_Mike.Controllers
             return Json(new { data = menuItemList });
         }
 
-        [HttpDelete]
+        //[HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var objFromDb = _unitOfWork.MenuItem.GetFirstOrDefault(u => u.Id == id);
