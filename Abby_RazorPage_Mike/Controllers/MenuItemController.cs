@@ -1,5 +1,4 @@
 ﻿using Abby.DataAccess.Repository.IRepository;
-using Abby.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Abby_RazorPage_Mike.Controllers
