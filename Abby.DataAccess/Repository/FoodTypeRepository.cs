@@ -6,9 +6,9 @@ namespace Abby.DataAccess.Repository
 {
     public class FoodTypeRepository : Repository<FoodType>, IFoodTypeRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly AbbyDbContext _db;
         // Need to pass dbContext to Parent Class
-        public FoodTypeRepository(ApplicationDbContext db) : base(db)
+        public FoodTypeRepository(AbbyDbContext db) : base(db)
         {
             _db = db;
         }

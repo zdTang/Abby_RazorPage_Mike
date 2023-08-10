@@ -12,9 +12,9 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
     public class EditModel : PageModel
     {
         public Category? Category { get; set; }    // This is Model, the Razor content Page will use it to retrieve data
-        //private readonly ApplicationDbContext _db; // No pattern
+        //private readonly AbbyDbContext _db; // No pattern
         private readonly IUnitOfWork _unitOfWork;    // UnitOfWork Pattern
-        public EditModel(/*ApplicationDbContext db*/IUnitOfWork unitOfWork)
+        public EditModel(/*AbbyDbContext db*/IUnitOfWork unitOfWork)
         {
             //_db = db;                  // No pattern, access DbContext directly
             _unitOfWork = unitOfWork;

@@ -9,11 +9,11 @@ namespace Abby_RazorPage_Mike.Pages.Admin.FoodTypes
 {
     public class DeleteModel : PageModel
     {
-        //private readonly ApplicationDbContext? _context;
+        //private readonly AbbyDbContext? _context;
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
         public FoodType? FoodType { get; set; }
-        public DeleteModel(/*ApplicationDbContext context*/ IUnitOfWork unitOfWork)
+        public DeleteModel(/*AbbyDbContext context*/ IUnitOfWork unitOfWork)
         {
             //_context = context;
             _unitOfWork = unitOfWork;

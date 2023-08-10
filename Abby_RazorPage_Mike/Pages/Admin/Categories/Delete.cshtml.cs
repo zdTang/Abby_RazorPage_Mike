@@ -9,11 +9,11 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
     [BindProperties]
     public class DeleteModel : PageModel
     {
-        //private readonly ApplicationDbContext _db;
+        //private readonly AbbyDbContext _db;
         private readonly IUnitOfWork _unitOfWork;
         public Category Category { get; set; }
 
-        public DeleteModel(/*ApplicationDbContext db*/ IUnitOfWork unitOfWork)
+        public DeleteModel(/*AbbyDbContext db*/ IUnitOfWork unitOfWork)
         {
             //_db = db;
             _unitOfWork = unitOfWork;

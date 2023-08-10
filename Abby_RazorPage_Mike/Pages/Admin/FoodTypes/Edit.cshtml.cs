@@ -11,9 +11,9 @@ namespace Abby_RazorPage_Mike.Pages.Admin.FoodTypes
     {
         [BindProperty]
         public FoodType? FoodType { get; set; }
-        //private readonly ApplicationDbContext? _context;
+        //private readonly AbbyDbContext? _context;
         private readonly IUnitOfWork _unitOfWork;
-        public UpdateModel(/*ApplicationDbContext? context*/ IUnitOfWork unitOfWork)
+        public UpdateModel(/*AbbyDbContext? context*/ IUnitOfWork unitOfWork)
         {
             //_context = context;
             _unitOfWork = unitOfWork;

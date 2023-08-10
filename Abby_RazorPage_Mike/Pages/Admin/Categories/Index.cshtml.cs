@@ -6,7 +6,7 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
 {
     public class IndexModel : PageModel
     {
-        //private readonly ApplicationDbContext _db;
+        //private readonly AbbyDbContext _db;
         // The benefit of using Repository is seperation of concerns.
         // We will not deal with DAL by accessing dbContext directly and repeatedly.
         // All necessary operations with dbContext are wrapped and recreated in the Repository

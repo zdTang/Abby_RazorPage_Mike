@@ -2,6 +2,7 @@ using Abby.DataAccess.Data;
 using Abby.DataAccess.Repository;
 using Abby.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Abby_RazorPage_Mike
 {
@@ -13,9 +14,11 @@ namespace Abby_RazorPage_Mike
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+            builder.Services.AddDbContext<AbbyDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AbbyDbContext>();
             // The following are for DI registeration
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

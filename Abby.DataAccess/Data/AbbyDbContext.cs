@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Abby.DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class AbbyDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public AbbyDbContext(DbContextOptions<AbbyDbContext> options) : base(options)
         {
 
         }

@@ -13,7 +13,7 @@ namespace Abby_RazorPage_Mike.Pages.Admin.Categories
     public class CreateModel : PageModel
     {
         public Category Category { get; set; }
-        //private readonly ApplicationDbContext _db;                     // No repository pattern
+        //private readonly AbbyDbContext _db;                     // No repository pattern
         //private readonly ICategoryRepository _categoriesRepository;    // Repository pattern
         private readonly IUnitOfWork _unitOfWork;                        // UnitOfWork pattern
         public CreateModel(/*ICategoryRepository categoryRepository*/IUnitOfWork unitOfWork)

@@ -9,11 +9,11 @@ namespace Abby_RazorPage_Mike.Pages.Admin.FoodTypes
 {
     public class CreateModel : PageModel
     {
-        //private readonly ApplicationDbContext? _context;
+        //private readonly AbbyDbContext? _context;
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
         public FoodType FoodType { get; set; } //This property will be bind as Model
-        public CreateModel(/*ApplicationDbContext? context*/ IUnitOfWork unitOfWork)
+        public CreateModel(/*AbbyDbContext? context*/ IUnitOfWork unitOfWork)
         {
             //_context = context;
             _unitOfWork = unitOfWork;

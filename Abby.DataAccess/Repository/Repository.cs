@@ -8,10 +8,10 @@ namespace Abby.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContext? _dbContext;
+        private readonly AbbyDbContext? _dbContext;
         internal DbSet<T> dbSet;  //Internal types or members are accessible only within files in the same assembly
 
-        public Repository(ApplicationDbContext dbContext)
+        public Repository(AbbyDbContext dbContext)
         {
             _dbContext = dbContext;
             this.dbSet = _dbContext.Set<T>();   // Get this T type Entity from dbContext

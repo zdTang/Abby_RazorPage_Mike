@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Abby.DataAccess.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AbbyDbContext))]
     [Migration("20230730142245_AddCategoryAndFoodTypeTable")]
     partial class AddCategoryAndFoodTypeTable
     {

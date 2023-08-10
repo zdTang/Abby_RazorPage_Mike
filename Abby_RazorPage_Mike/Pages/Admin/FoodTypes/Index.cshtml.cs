@@ -7,10 +7,10 @@ namespace Abby_RazorPage_Mike.Pages.Admin.FoodTypes
 {
     public class IndexModel : PageModel
     {
-        //private readonly ApplicationDbContext? _db;
+        //private readonly AbbyDbContext? _db;
         private readonly IUnitOfWork _unitOfWork;
         public IEnumerable<FoodType>? FoodTypes { get; set; }
-        public IndexModel(/*ApplicationDbContext? db*/ IUnitOfWork unitOfWork)
+        public IndexModel(/*AbbyDbContext? db*/ IUnitOfWork unitOfWork)
         {
             // _db = db;
             _unitOfWork = unitOfWork;

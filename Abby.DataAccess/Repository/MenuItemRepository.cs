@@ -6,9 +6,9 @@ namespace Abby.DataAccess.Repository
 {
     public class MenuItemRepository : Repository<MenuItem>, IMenuItemRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly AbbyDbContext _db;
         // Need to pass dbContext to Parent Class
-        public MenuItemRepository(ApplicationDbContext db) : base(db)
+        public MenuItemRepository(AbbyDbContext db) : base(db)
         {
             _db = db;
         }
