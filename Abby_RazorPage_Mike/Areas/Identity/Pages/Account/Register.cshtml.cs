@@ -97,6 +97,16 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            [Display(Name = "My First Name")] // If <label> has it's own content, which will be in a higher level and be preoritized 
+            public string FirstName { get; set; }
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+            [Required]
+            [Phone]
+            [Display(Name = "Telephone Number")]
+            public string PhoneNumber { get; set; }
         }
 
 
