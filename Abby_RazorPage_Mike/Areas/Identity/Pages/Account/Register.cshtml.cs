@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Abby.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -118,20 +119,28 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");//if returnUrl is Null, then assign it 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            returnUrl ??= Url.Content("~/");                                                          //if returnUrl is Null, then assign it 
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList(); //Get a list of all external login schemes (Facebook, Googel...) 
             if (ModelState.IsValid)
             {
-                // Create user based on Register Information
-                var user = CreateUser();
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                var user = CreateUser();                                                          // Create empty user 
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);     // Add UserName(Email) to User
+                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);       // Add Email to User
+
+                // Here to add comstomized properties to User object.
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.PhoneNumber = Input.PhoneNumber;
+
+                /*======================Very vital, use userManager to write User object to DB========================*/
+                // Create user based on Register Information, this step will write User informaton into DB
                 var result = await _userManager.CreateAsync(user, Input.Password);   // the main method to create a user
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
                     // Confirm Email Address
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -142,15 +151,17 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
+                    // Via Email, Send confirmation request to Email address
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)    // Need Email confirmation
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
+                        /*=============Key process: SignIn User(Attach cookie or token to User)=============*/
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
@@ -166,11 +177,13 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        //private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                //return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
