@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using Abby.Models;
+using Abby.Utility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -30,13 +31,15 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -135,10 +139,51 @@ namespace Abby_RazorPage_Mike.Areas.Identity.Pages.Account
 
                 /*======================Very vital, use userManager to write User object to DB========================*/
                 // Create user based on Register Information, this step will write User informaton into DB
+
                 var result = await _userManager.CreateAsync(user, Input.Password);   // the main method to create a user
+
+
+                /*===================HERE WE GIVE THE USER A ROLE======================*/
+
+                // Create 4 roles and write to DB
+                if (!await _roleManager.RoleExistsAsync(SD.KitchenRole))
+                {
+                    _roleManager.CreateAsync(new IdentityRole(SD.KitchenRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.ManagerRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.FrontDeskRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.CustomerRole)).GetAwaiter().GetResult();
+                }
+
 
                 if (result.Succeeded)
                 {
+                    // Add Role to User
+                    string role = Request.Form["rdUserRole"].ToString();  // Get the Value of Radio Button from Form (Notive use "name") 
+                    if (role == SD.KitchenRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.KitchenRole);
+                    }
+                    else
+                    {
+                        if (role == SD.ManagerRole)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.ManagerRole);
+                        }
+                        else
+                        {
+                            if (role == SD.FrontDeskRole)
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.FrontDeskRole);
+                            }
+                            else
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.CustomerRole);
+                            }
+                        }
+                    }
+
+                    // Add Role to User done!
+
                     _logger.LogInformation("User created a new account with password.");
 
                     // Confirm Email Address
