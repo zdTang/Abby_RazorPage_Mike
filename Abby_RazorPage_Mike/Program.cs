@@ -3,6 +3,8 @@ using Abby.DataAccess.Repository;
 using Abby.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Abby.Utility;
 
 namespace Abby_RazorPage_Mike
 {
@@ -18,7 +20,15 @@ namespace Abby_RazorPage_Mike
             builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-            builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AbbyDbContext>();
+            //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AbbyDbContext>();
+
+            builder.Services
+                .AddIdentity<IdentityUser, IdentityRole>()        // if we need use RoleManager, we need add IdentityRole
+                .AddEntityFrameworkStores<AbbyDbContext>()        // Be aware the correct DbContext name
+                .AddDefaultTokenProviders();                      // used to generate Tokens for changing password or reset Email....
+
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
             // The following are for DI registeration
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
