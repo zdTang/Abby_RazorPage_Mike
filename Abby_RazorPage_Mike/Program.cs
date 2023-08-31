@@ -32,6 +32,14 @@ namespace Abby_RazorPage_Mike
             // The following are for DI registeration
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-7.0
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
