@@ -8,12 +8,14 @@ namespace Abby.DataAccess.Repository
         public ICategoryRepository Category { get; private set; }
         public IFoodTypeRepository FoodType { get; private set; }
         public IMenuItemRepository MenuItem { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
         public UnitOfWork(AbbyDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
             FoodType = new FoodTypeRepository(_db);     // instantiate an Repository
             MenuItem = new MenuItemRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
         }
 
 
