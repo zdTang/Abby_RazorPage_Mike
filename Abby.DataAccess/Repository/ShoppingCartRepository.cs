@@ -12,16 +12,28 @@ namespace Abby.DataAccess.Repository
             _db = db;
         }
 
-
-        public void Update(ShoppingCart shoppingCart)
+        public int DecrementCount(ShoppingCart shoppingCart, int count)
         {
-            var objFromDb = _db.ShoppingCart.FirstOrDefault(u => u.Id == shoppingCart.Id);
-            if (objFromDb != null)
-            {
-                objFromDb.ApplicationUserId = shoppingCart.ApplicationUserId;
-                objFromDb.MenuItemId = shoppingCart.MenuItemId;
-                objFromDb.Count = shoppingCart.Count;
-            }
+            shoppingCart.Count -= count;
+            _db.SaveChanges();
+            return shoppingCart.Count;
         }
+
+        public int IncrementCount(ShoppingCart shoppingCart, int count)
+        {
+            shoppingCart.Count += count;
+            _db.SaveChanges();
+            return shoppingCart.Count;
+        }
+        //public void Update(ShoppingCart shoppingCart)
+        //{
+        //    var objFromDb = _db.ShoppingCart.FirstOrDefault(u => u.Id == shoppingCart.Id);
+        //    if (objFromDb != null)
+        //    {
+        //        objFromDb.ApplicationUserId = shoppingCart.ApplicationUserId;
+        //        objFromDb.MenuItemId = shoppingCart.MenuItemId;
+        //        objFromDb.Count = shoppingCart.Count;
+        //    }
+        //}
     }
 }
