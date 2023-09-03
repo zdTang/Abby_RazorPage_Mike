@@ -1,5 +1,5 @@
 ﻿@page
-@model Abby_RazorPage_Mike.Pages.Customer.Cart.IndexModel
+@model Abby_RazorPage_Mike.Pages.Customer.Cart.IndexModel 
 <form method="post">
 	<br />
 	<div class="container">
@@ -60,8 +60,8 @@
 					<div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-3 pr-4">
 						<ul class="list-group">
 							<li class="list-group-item d-flex justify-content-between bg-light">
-								<span class="text-info"> Total (USD)</span>
-								<strong class="text-info">$</strong>
+								<span class="text-info"> Total (USD) </span>
+								<strong class="text-info">$ &nbsp; @Math.Round(Model.CartTotal)</strong>
 							</li>
 						</ul>
 					</div>

@@ -10,11 +10,14 @@ namespace Abby_RazorPage_Mike.Pages.Customer.Cart
     public class IndexModel : PageModel
     {
         public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
-        private readonly IUnitOfWork _unitOfWork;
+		public double CartTotal { get; set; }
+		private readonly IUnitOfWork _unitOfWork;
         public IndexModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        }
+            CartTotal = 0;
+
+		}
         public void OnGet()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -25,6 +28,10 @@ namespace Abby_RazorPage_Mike.Pages.Customer.Cart
 
 					 includeProperties: "MenuItem,MenuItem.FoodType,MenuItem.Category"); ;
             }
-        }
+			foreach (var cartItem in ShoppingCartList)
+			{
+				CartTotal += (cartItem.MenuItem.Price * cartItem.Count);
+			}
+		}
     }
 }
