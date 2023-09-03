@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/Abby_RazorPage_Mike.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css" />  <!--This is not the best place,not every page use this. also, the css should from local-->
-    <!--  <script src="https://kit.fontawesome.com/157d7c246f.js" crossorigin="anonymous"></script>    -->
+    <script src="https://kit.fontawesome.com/157d7c246f.js" crossorigin="anonymous"></script> 
 </head>
 <body>
     <header>
@@ -40,6 +40,12 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-area="" asp-page="/Admin/FoodTypes/Index">Others</a>
                             </div>
+                        </li>
+                        <!--Shopping Cart-->
+                        <li>
+                            <a class="nav-link text-white-50" asp-area="" asp-page="/Customer/Cart/Index">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
                         </li>
 
                     </ul>
