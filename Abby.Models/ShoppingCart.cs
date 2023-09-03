@@ -9,7 +9,7 @@ namespace Abby.Models
         public int Id { get; set; }
         public int MenuItemId { get; set; }
         [ForeignKey("MenuItemId")]
-        [NotMapped]
+        //[NotMapped]
         [ValidateNever]
         public MenuItem MenuItem { get; set; }
 
@@ -17,7 +17,7 @@ namespace Abby.Models
         public int Count { get; set; }
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
-        [NotMapped]
+        //[NotMapped]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
     }

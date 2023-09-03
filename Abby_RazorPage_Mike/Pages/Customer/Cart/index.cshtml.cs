@@ -21,7 +21,9 @@ namespace Abby_RazorPage_Mike.Pages.Customer.Cart
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (claim != null)
             {
-                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(filter: u => u.ApplicationUserId == claim.Value);
+                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(filter: u => u.ApplicationUserId == claim.Value,
+
+					 includeProperties: "MenuItem,MenuItem.FoodType,MenuItem.Category"); ;
             }
         }
     }
