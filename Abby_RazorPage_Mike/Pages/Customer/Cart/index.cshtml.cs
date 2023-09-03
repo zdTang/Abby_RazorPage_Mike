@@ -1,6 +1,7 @@
 using Abby.DataAccess.Repository.IRepository;
 using Abby.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
@@ -33,5 +34,12 @@ namespace Abby_RazorPage_Mike.Pages.Customer.Cart
 				CartTotal += (cartItem.MenuItem.Price * cartItem.Count);
 			}
 		}
-    }
+
+		public IActionResult OnPostPlus(int cartId)
+		{
+			var cart = _unitOfWork.ShoppingCart.GetFirstOrDefault(u => u.Id == cartId);
+			_unitOfWork.ShoppingCart.IncrementCount(cart, 1);
+			return RedirectToPage("/Customer/Cart/Index");
+		}
+	}
 }
