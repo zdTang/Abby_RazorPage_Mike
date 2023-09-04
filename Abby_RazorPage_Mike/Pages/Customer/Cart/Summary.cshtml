@@ -11,7 +11,7 @@
 							<h3 class="text-white-50">Order Summary</h3>
 						</div>
 						<div class="col-6 text-end">
-							<a class="btn btn-outline-info btn-sm">Back to Cart</a>
+							<a asp-page="Index" class="btn btn-outline-info btn-sm">Back to Cart</a>
 						</div>
 					</div>
 				</div>
@@ -29,7 +29,10 @@
 										<label>Name</label>
 									</div>
 									<div class="col-9">
-										<input class="form-control" />
+										<input class="form-control"
+										asp-for="OrderHeader.PickupName"
+										readonly/> 
+										
 									</div>
 								</div>
 								<div class="row my-1">
@@ -37,7 +40,8 @@
 										<label>Phone Number</label>
 									</div>
 									<div class="col-9">
-										<input class="form-control" />
+										<input class="form-control"
+										 asp-for="OrderHeader.PhoneNumber" />
 									</div>
 								</div>
 								<div class="row my-1">
@@ -45,7 +49,9 @@
 										<label>Pickup Date</label>
 									</div>
 									<div class="col-9">
-										<input type="date" class="form-control" />
+										<input type="date" 
+										class="form-control"
+								  	    asp-for="OrderHeader.PickUpDate" />
 									</div>
 								</div>
 								<div class="row my-1">
@@ -53,7 +59,9 @@
 										<label>Pickup Time</label>
 									</div>
 									<div class="col-9">
-										<input type="time" class="form-control" />
+										<input type="time" 
+										class="form-control"
+										asp-for="OrderHeader.PickUpTime" />
 									</div>
 								</div>
 								<div class="row my-1">
@@ -61,7 +69,7 @@
 										<label>Additional Instructions: </label>
 									</div>
 									<div class="col-9">
-										<textarea style="height:100px;" class="form-control"></textarea>
+										<textarea asp-for="OrderHeader.Comments" style="height:100px;" class="form-control"></textarea>
 									</div>
 								</div>
 							</div>
@@ -71,16 +79,18 @@
 									<span class="text-info">Order Summary:</span>
 								</h4>
 								<ul class="list-group mb-3">
+									@foreach(var detail in Model.ShoppingCartList){
 									<li class="list-group-item d-flex justify-content-between">
 										<div>
-											<h6 class="my-0">Name</h6>
-											<small class="text-muted">Quantity: Count</small>
+												<h6 class="my-0">@detail.MenuItem.Name</h6>
+												<small class="text-muted">Quantity: @detail.Count</small>
 										</div>
-										<span class="text-muted">$Price * Count</span>
+											<span class="text-muted">$@(detail.MenuItem.Price * @detail.Count)</span>
 									</li>
+									}
 									<li class="list-group-item d-flex justify-content-between bg-light">
 										<small class="text-info">Total (USD)</small>
-										<strong class="text-info">$</strong>
+										<strong class="text-info">$@Model.OrderHeader.OrderTotal</strong>
 									</li>
 								</ul>
 							</div>
